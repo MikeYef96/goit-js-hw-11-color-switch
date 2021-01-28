@@ -5,7 +5,6 @@
   "scripts": {
     "start": "webpack-dev-server --env.mode development",
     "build": "webpack --env.mode production",
-    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "repository": {
