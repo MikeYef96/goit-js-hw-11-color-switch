@@ -30,7 +30,7 @@ function startColorGenHandler(event) {
       () =>
         (refs.body.style.backgroundColor =
           colors[randomIntegerFromInterval(0, colors.length)]),
-      500,
+      1000,
     );
   }
 }
