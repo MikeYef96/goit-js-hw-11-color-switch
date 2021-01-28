@@ -1,38 +1,37 @@
 import './styles.css';
-import menu from './menu.json';
-import templateItem from './templates/templates.hbs';
-import { registerDecorator } from 'handlebars';
 
-const Theme = {
-  LIGHT: 'light-theme',
-  DARK: 'dark-theme',
-};
+const colors = [
+  '#FFFFFF',
+  '#2196F3',
+  '#4CAF50',
+  '#FF9800',
+  '#009688',
+  '#795548',
+];
 
 const refs = {
+  start: document.querySelector("button[data-action='start']"),
+  stop: document.querySelector("button[data-action='stop']"),
   body: document.querySelector('body'),
-  menu: document.querySelector('ul.js-menu'),
-  switch: document.querySelector('#theme-switch-toggle'),
 };
 
-const menuItem = templateItem(menu);
-refs.menu.insertAdjacentHTML('afterbegin', menuItem);
+const randomIntegerFromInterval = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
 
-refs.body.classList.add(localStorage.getItem('theme'));
+refs.start.addEventListener('click', startColorGenHandler);
+// refs.stop.addEventListener('click', stopColorGenHandler);
 
-if (localStorage.getItem('theme') === Theme.DARK) {
-  refs.switch.checked = true;
-} else {
-  refs.body.setAttribute('class', 'light-theme');
+function startColorGenHandler() {
+  refs.body.style.backgroundColor = setInterval(
+    randomIntegerFromInterval(...colors),
+    1000,
+  );
 }
 
-refs.switch.addEventListener('click', themeChanger);
+// const handleColorGeneration = event => {
+//   body.style.backgroundColor = colors;
+// };
 
-function themeChanger() {
-  if (refs.switch.checked) {
-    localStorage.setItem('theme', Theme.DARK);
-    refs.body.setAttribute('class', 'dark-theme');
-  } else {
-    localStorage.setItem('theme', Theme.LIGHT);
-    refs.body.setAttribute('class', 'light-theme');
-  }
-}
+// startBtn.addEventListener('click', handleColorGeneration);
+// stopBtn.addEventListener('click', handleStopColorGeneration);
