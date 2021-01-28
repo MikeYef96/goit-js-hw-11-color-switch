@@ -19,19 +19,26 @@ const randomIntegerFromInterval = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
+let intervalId;
 refs.start.addEventListener('click', startColorGenHandler);
-// refs.stop.addEventListener('click', stopColorGenHandler);
+refs.stop.addEventListener('click', stopColorGenHandler);
 
-function startColorGenHandler() {
-  refs.body.style.backgroundColor = setInterval(
-    randomIntegerFromInterval(...colors),
-    1000,
-  );
+function startColorGenHandler(event) {
+  if (event.target) {
+    event.target.disabled = true;
+    intervalId = setInterval(
+      () =>
+        (refs.body.style.backgroundColor =
+          colors[randomIntegerFromInterval(0, colors.length)]),
+      500,
+    );
+  }
 }
 
-// const handleColorGeneration = event => {
-//   body.style.backgroundColor = colors;
-// };
-
-// startBtn.addEventListener('click', handleColorGeneration);
-// stopBtn.addEventListener('click', handleStopColorGeneration);
+function stopColorGenHandler(event) {
+  if (event.target) {
+    clearInterval(intervalId);
+    refs.start.disabled = false;
+    refs.body.style.backgroundColor = '';
+  }
+}
