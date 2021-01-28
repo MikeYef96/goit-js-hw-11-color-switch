@@ -9,12 +9,15 @@ npm install
 
 # Third step
 npm start       
+
 **To run web page on server**;
 
 # Fourth step
 npm run build  
+
 **To build files for deploying**
 
 # Fifth step
-npm run deploy 
+npm run deploy                                 
+
 **And you have new branch with working page**
